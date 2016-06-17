@@ -1,0 +1,58 @@
+#!/usr/bin/python
+import pandas as pd
+import sys
+ 
+def Main():
+    data = read_mapper_output()
+    aggregate_loanPurpose(data)
+    find_loan_status(data)
+    find_max_loan(data)
+    find_num_recovered_loan(data)
+ 
+def read_mapper_output():
+    data = []
+    for line in sys.stdin:
+        key, val = line.split("\t")
+        F, key = key.split("##")
+        data.append([key, val])
+    return data
+ 
+def aggregate_loanPurpose(data):
+    u_purpose = {}
+    for key, val in data:
+        val = int(val)
+        if not u_purpose.has_key(key):
+            u_purpose[key] = 0
+        u_purpose[key] += val
+    for key, val in u_purpose1.iteritems():
+        print("{0}\t{1}".format(key,val))
+
+def find_loan_status(data):
+    u_status = {}
+    for key,val in data:
+        val = int(val) 
+        if not u_status.has_key(key):
+            u_status[key] = 0
+        u_status[key] += val
+    for key,val in u_status.iteritems():
+        print("{0}\t{1}".format(key,val))
+ 
+def find_num_recovered_loan(data):
+    u_recoveries = {}
+    for key,val in data:
+        val = int(val)
+        if not u_recoveries.has_key(key):
+            u_recoveries[key]=0
+        u_recoveries[key] += val
+    for key,val in u_recoveries.iteritems():
+        print("{0}\t{1}".format(key,val))
+
+
+def find_max_loan(data):
+    max_list=[]
+    for key,val in data:
+        max_list.append(key)
+        max_list = map(int, max_list)
+    max_amnt = max(max_list)
+    print(max_amnt)
+Main()
