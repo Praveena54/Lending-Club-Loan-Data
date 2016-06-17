@@ -1,0 +1,41 @@
+#!/usr/bin/python
+import pandas as pd
+import sys
+import csv
+
+def Main():
+    data = read_csv_data()
+    aggregate_loanPurpose(data)
+    find_loan_status(data)
+    find_max_loan(data)
+    find_num_recovered_loan(data)
+
+def read_csv_data():
+    dat = pd.read_csv(sys.stdin)
+    return dat
+ 
+def aggregate_loanPurpose(data):
+     purposes = data['purpose']
+     for purpose in purposes:
+         print("Finding1##{0}\t{1}".format(purpose,1))
+
+def find_loan_status(data):
+    statuses = data['loan_status'] 
+    for status in statuses:
+        print("Finding2##{0}\t{1}".format(status,1))
+
+ 
+def find_max_loan(data):
+    maxLoans= data['loan_amnt']
+    for max_loan in maxLoans:
+        print("Finding3##{0}\t{1}".format(max_loan,1))
+ 
+def find_num_recovered_loan(data):
+    recoveries = data['recoveries']
+    for val in recoveries:
+        if val > 0:
+            print("Finding4##{0}\t{1}".format("NotRecovered",1))
+        else:
+            print("Finding4##\t{0}\t{1}".format("Recovered", 1))
+ 
+Main()
